@@ -20,8 +20,9 @@ package de.taimos.dvalin.jaxrs.websocket;
  * #L%
  */
 
-import java.io.IOException;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.taimos.dvalin.jaxrs.MapperFactory;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 import org.eclipse.jetty.websocket.api.WriteCallback;
@@ -29,10 +30,7 @@ import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import de.taimos.dvalin.jaxrs.MapperFactory;
+import java.io.IOException;
 
 /**
  * Socket adapter for clients
