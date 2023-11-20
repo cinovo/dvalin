@@ -24,13 +24,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.InternalServerErrorException;
-import javax.ws.rs.NotAuthorizedException;
-import javax.ws.rs.RedirectionException;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
+import de.taimos.dvalin.jaxrs.RESTAssert;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.ws.rs.InternalServerErrorException;
+import jakarta.ws.rs.NotAuthorizedException;
+import jakarta.ws.rs.RedirectionException;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.SecurityContext;
 
 import org.apache.cxf.jaxrs.ext.MessageContext;
 import org.apache.cxf.jaxrs.ext.MessageContextImpl;
@@ -42,7 +43,6 @@ import com.google.common.base.Charsets;
 
 import de.taimos.dvalin.jaxrs.monitoring.InvocationInstance;
 import de.taimos.dvalin.jaxrs.security.IUser;
-import de.taimos.restutils.RESTAssert;
 
 @Component
 public class JAXRSContextImpl implements DvalinRSContext {

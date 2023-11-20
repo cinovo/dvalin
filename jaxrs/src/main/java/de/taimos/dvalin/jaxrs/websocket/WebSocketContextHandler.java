@@ -27,13 +27,17 @@ import jakarta.annotation.PostConstruct;
 
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.eclipse.jetty.websocket.servlet.WebSocketServlet;
-import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
+import org.eclipse.jetty.websocket.server.JettyWebSocketServlet;
+import org.eclipse.jetty.websocket.server.JettyWebSocketServletFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 
 public class WebSocketContextHandler extends ServletContextHandler {
 
@@ -61,16 +65,16 @@ public class WebSocketContextHandler extends ServletContextHandler {
         }
     }
 
-    private WebSocketServlet createServletForBeanName(final String beanName) {
-        return new WebSocketServlet() {
+    private JettyWebSocketServlet createServletForBeanName(final String beanName) {
+        return new JettyWebSocketServlet() {
 
             private static final long serialVersionUID = 1L;
 
 
             @Override
-            public void configure(WebSocketServletFactory factory) {
+            public void configure(JettyWebSocketServletFactory factory) {
                 WebSocketContextHandler.LOGGER.info("Configuring WebSocket Servlet for {}", beanName);
-                factory.getPolicy().setIdleTimeout(10000);
+                factory.setIdleTimeout(Duration.of(10000, ChronoUnit.MILLIS));
                 factory.setCreator((req, resp) -> WebSocketContextHandler.this.beanFactory.getBean(beanName));
             }
         };

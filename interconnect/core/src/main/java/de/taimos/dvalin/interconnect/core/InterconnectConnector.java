@@ -27,9 +27,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.TextMessage;
+import jakarta.jms.Destination;
+import jakarta.jms.JMSException;
+import jakarta.jms.TextMessage;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -54,11 +54,11 @@ public final class InterconnectConnector {
      * name of the message header to specify interconnect ICO class
      */
     public static final String HEADER_ICO_CLASS = "InterconnectICOClass";
-    
+
     private static final String INTERCONNECT_OBJECT_NULL_ERROR = "Interconnect Object was null";
     private static final String QUEUE_NAME_NULL_ERROR = "Queue name was null";
     private static final String TOPIC_NAME_NULL_ERROR = "Topic name was null";
-    
+
     /**
      * Singleton.
      */

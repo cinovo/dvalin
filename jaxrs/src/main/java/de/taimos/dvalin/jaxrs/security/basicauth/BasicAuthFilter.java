@@ -22,8 +22,8 @@ package de.taimos.dvalin.jaxrs.security.basicauth;
 
 import java.nio.charset.Charset;
 
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.core.HttpHeaders;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.cxf.message.Message;

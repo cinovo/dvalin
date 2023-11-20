@@ -20,7 +20,7 @@ package de.taimos.dvalin.jaxrs;
  * #L%
  */
 
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MediaType;
 
 import org.apache.cxf.jaxrs.provider.StringTextProvider;
 import org.junit.jupiter.api.Assertions;

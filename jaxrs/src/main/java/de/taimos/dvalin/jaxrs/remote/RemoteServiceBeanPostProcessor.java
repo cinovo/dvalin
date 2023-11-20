@@ -105,7 +105,7 @@ public class RemoteServiceBeanPostProcessor implements InstantiationAwareBeanPos
     }
 
     @Override
-    public PropertyValues postProcessPropertyValues(PropertyValues pvs, PropertyDescriptor[] pds, Object bean, String beanName) throws BeansException {
+    public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {
         InjectionMetadata metadata = this.buildResourceMetadata(bean.getClass());
         try {
             metadata.inject(bean, beanName, pvs);

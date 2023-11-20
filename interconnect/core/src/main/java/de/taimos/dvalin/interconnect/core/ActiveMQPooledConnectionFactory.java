@@ -1,6 +1,6 @@
 package de.taimos.dvalin.interconnect.core;
 
-import javax.jms.ConnectionFactory;
+import jakarta.jms.ConnectionFactory;
 
 import org.apache.activemq.pool.PooledConnectionFactory;
 import org.slf4j.Logger;

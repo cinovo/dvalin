@@ -4,8 +4,8 @@
 
 package de.taimos.dvalin.jaxrs.security.jwt.cognito;
 
-import javax.ws.rs.NotAuthorizedException;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.NotAuthorizedException;
+import jakarta.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

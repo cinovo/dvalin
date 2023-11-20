@@ -22,8 +22,8 @@ package de.taimos.dvalin.jaxrs.security.jwt;
 
 import java.text.ParseException;
 
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.core.HttpHeaders;
 
 import org.apache.cxf.message.Message;
 import org.apache.cxf.security.SecurityContext;

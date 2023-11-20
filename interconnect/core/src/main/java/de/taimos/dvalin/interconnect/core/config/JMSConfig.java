@@ -20,7 +20,7 @@ package de.taimos.dvalin.interconnect.core.config;
  * #L%
  */
 
-import javax.jms.ConnectionFactory;
+import jakarta.jms.ConnectionFactory;
 
 import de.taimos.dvalin.interconnect.core.ActiveMQPooledConnectionFactory;
 import de.taimos.dvalin.interconnect.core.DvalinConnectionFactory;
@@ -32,7 +32,7 @@ import de.taimos.dvalin.interconnect.core.spring.IDaemonMessageSender;
 import de.taimos.dvalin.interconnect.core.spring.SingleDaemonMessageHandler;
 import de.taimos.dvalin.interconnect.model.service.ADaemonHandler;
 import org.apache.activemq.command.ActiveMQQueue;
-import org.apache.activemq.jms.pool.PooledConnectionFactory;
+import org.apache.activemq.pool.PooledConnectionFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,6 +46,7 @@ import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
+@SuppressWarnings("ALL")
 @Configuration
 @Profile(de.taimos.daemon.spring.Configuration.PROFILES_PRODUCTION)
 @EnableTransactionManagement
