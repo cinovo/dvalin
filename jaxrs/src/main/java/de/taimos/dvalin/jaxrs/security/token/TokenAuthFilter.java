@@ -27,8 +27,8 @@ import org.apache.cxf.message.Message;
 import org.apache.cxf.security.SecurityContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.core.HttpHeaders;
 
 @JaxRsComponent
 @BeanAvailable(ITokenAuthUserDAO.class)

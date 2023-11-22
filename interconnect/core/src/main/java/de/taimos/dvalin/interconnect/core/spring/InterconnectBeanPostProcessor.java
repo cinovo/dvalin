@@ -37,14 +37,8 @@ package de.taimos.dvalin.interconnect.core.spring;
  */
 
 
-import java.beans.PropertyDescriptor;
-import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.lang.reflect.Member;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.LinkedList;
-
+import de.taimos.dvalin.interconnect.core.daemon.Interconnect;
+import de.taimos.dvalin.interconnect.model.service.IDaemon;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
@@ -61,12 +55,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
-import de.taimos.dvalin.interconnect.core.daemon.Interconnect;
-import de.taimos.dvalin.interconnect.model.service.IDaemon;
+import java.beans.PropertyDescriptor;
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.lang.reflect.Member;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.LinkedList;
 
 @Component
 @SuppressWarnings("serial")
-public class InterconnectBeanPostProcessor implements InstantiationAwareBeanPostProcessor, BeanFactoryAware, Serializable {
+public class InterconnectBeanPostProcessor
+    implements InstantiationAwareBeanPostProcessor, BeanFactoryAware, Serializable {
 
     private transient ConfigurableListableBeanFactory beanFactory;
     private transient DaemonProxyFactory proxyFactory;
@@ -99,7 +99,7 @@ public class InterconnectBeanPostProcessor implements InstantiationAwareBeanPost
     }
 
     @Override
-    public PropertyValues postProcessPropertyValues(PropertyValues pvs, PropertyDescriptor[] pds, Object bean, String beanName) throws BeansException {
+    public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {
         InjectionMetadata metadata = this.buildResourceMetadata(bean.getClass());
         try {
             metadata.inject(bean, beanName, pvs);
@@ -131,10 +131,12 @@ public class InterconnectBeanPostProcessor implements InstantiationAwareBeanPost
                 if (method.equals(ClassUtils.getMostSpecificMethod(method, clazz))) {
                     if (bridgedMethod.isAnnotationPresent(Interconnect.class)) {
                         if (Modifier.isStatic(method.getModifiers())) {
-                            throw new IllegalStateException("@Interconnect annotation is not supported on static methods");
+                            throw new IllegalStateException(
+                                "@Interconnect annotation is not supported on static methods");
                         }
                         if (method.getParameterTypes().length != 1) {
-                            throw new IllegalStateException("@Interconnect annotation requires a single-arg method: " + method);
+                            throw new IllegalStateException(
+                                "@Interconnect annotation requires a single-arg method: " + method);
                         }
                         PropertyDescriptor pd = BeanUtils.findPropertyForMethod(bridgedMethod, clazz);
                         currElements.add(new InterconnectElement(method, pd));
@@ -170,7 +172,8 @@ public class InterconnectBeanPostProcessor implements InstantiationAwareBeanPost
         protected Object getResourceToInject(Object target, String requestingBeanName) {
             Class<?> dependencyType = this.getDependencyDescriptor().getDependencyType();
             if (!IDaemon.class.isAssignableFrom(dependencyType)) {
-                throw new RuntimeException("Field has to be of type IDaemon but was of type " + dependencyType.getCanonicalName());
+                throw new RuntimeException(
+                    "Field has to be of type IDaemon but was of type " + dependencyType.getCanonicalName());
             }
             return InterconnectBeanPostProcessor.this.proxyFactory.create((Class<? extends IDaemon>) dependencyType);
         }

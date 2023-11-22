@@ -1,10 +1,10 @@
 package de.taimos.dvalin.interconnect.core;
 
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
-import javax.jms.ExceptionListener;
-import javax.jms.JMSException;
-
+import jakarta.jms.Connection;
+import jakarta.jms.ConnectionFactory;
+import jakarta.jms.ExceptionListener;
+import jakarta.jms.JMSContext;
+import jakarta.jms.JMSException;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.ClientInternalExceptionListener;
 import org.apache.activemq.transport.TransportListener;
@@ -42,7 +42,8 @@ public class DvalinConnectionFactory implements ConnectionFactory {
     public DvalinConnectionFactory() {
         String brokerURL = System.getProperty(DvalinConnectionFactory.SYSPROP_IBROKERURL);
         if (brokerURL == null) {
-            DvalinConnectionFactory.LOGGER.warn("No " + DvalinConnectionFactory.SYSPROP_IBROKERURL + " configured, using tcp://localhost:61616.");
+            DvalinConnectionFactory.LOGGER.warn(
+                "No " + DvalinConnectionFactory.SYSPROP_IBROKERURL + " configured, using tcp://localhost:61616.");
             brokerURL = "tcp://localhost:61616";
         }
         this.userName = System.getProperty(DvalinConnectionFactory.SYSPROP_USERNAME);
@@ -151,4 +152,26 @@ public class DvalinConnectionFactory implements ConnectionFactory {
     public Connection createConnection(String userName, String password) throws JMSException {
         return this.innerAdapter.createConnection(userName, password);
     }
+
+    @Override
+    public JMSContext createContext() {
+        throw new UnsupportedOperationException("createContext() is not supported");
+    }
+
+    @Override
+    public JMSContext createContext(String userName, String password) {
+        throw new UnsupportedOperationException("createContext(userName, password) is not supported");
+    }
+
+    @Override
+    public JMSContext createContext(String userName, String password, int sessionMode) {
+        throw new UnsupportedOperationException("createContext(userName, password, sessionMode) is not supported");
+    }
+
+    @Override
+    public JMSContext createContext(int sessionMode) {
+        throw new UnsupportedOperationException("createContext(sessionMode) is not supported");
+    }
+
+
 }

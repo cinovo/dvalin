@@ -28,6 +28,7 @@ import com.amazonaws.AmazonWebServiceClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.InjectionMetadata;
@@ -91,9 +92,9 @@ public class AWSClientBeanPostProcessor implements InstantiationAwareBeanPostPro
         return bean;
     }
 
-    @Override
     @Deprecated
-    public PropertyValues postProcessPropertyValues(PropertyValues pvs, PropertyDescriptor[] pds, Object bean, String beanName) {
+    @Override
+    public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {
         InjectionMetadata metadata = this.buildResourceMetadata(bean.getClass());
         try {
             metadata.inject(bean, beanName, pvs);

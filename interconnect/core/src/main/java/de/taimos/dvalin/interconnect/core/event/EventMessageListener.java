@@ -41,10 +41,10 @@ import org.springframework.util.ErrorHandler;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import javax.jms.ConnectionFactory;
-import javax.jms.Message;
-import javax.jms.MessageListener;
-import javax.jms.TextMessage;
+import jakarta.jms.ConnectionFactory;
+import jakarta.jms.Message;
+import jakarta.jms.MessageListener;
+import jakarta.jms.TextMessage;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.HashSet;

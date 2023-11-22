@@ -23,13 +23,13 @@ package de.taimos.dvalin.interconnect.core;
 import java.io.IOException;
 import java.io.Serializable;
 
-import javax.jms.Connection;
-import javax.jms.DeliveryMode;
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageProducer;
-import javax.jms.Session;
-import javax.jms.Topic;
+import jakarta.jms.Connection;
+import jakarta.jms.DeliveryMode;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
+import jakarta.jms.MessageProducer;
+import jakarta.jms.Session;
+import jakarta.jms.Topic;
 
 import org.apache.activemq.pool.PooledConnectionFactory;
 import org.slf4j.Logger;

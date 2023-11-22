@@ -37,8 +37,8 @@ import de.taimos.dvalin.interconnect.model.service.DaemonScanner;
 import de.taimos.dvalin.interconnect.model.service.IDaemonHandler;
 import org.slf4j.Logger;
 
-import javax.jms.Message;
-import javax.jms.TextMessage;
+import jakarta.jms.Message;
+import jakarta.jms.TextMessage;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.UUID;

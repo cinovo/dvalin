@@ -50,20 +50,23 @@
         </contributor>
     </contributors>
     <properties>
-        <org.springframework.version>5.3.27</org.springframework.version>
-        <activemq.version>5.16.5</activemq.version>
+        <org.springframework.version>6.1.0</org.springframework.version>
+        <activemq.version>6.0.0</activemq.version>
         <aws.version>1.12.467</aws.version>
         <bson.version>2.13.1</bson.version>
-        <cxf.version>3.5.6</cxf.version>
+        <cxf.version>4.0.2</cxf.version>
         <guava.version>32.0.0-jre</guava.version>
         <hibernate.version>5.6.14.Final</hibernate.version>
         <http.version>2.2</http.version>
         <jackson.version>2.15.2</jackson.version>
         <jakarta.annotation-api.version>2.1.1</jakarta.annotation-api.version>
+        <jakarta.jms-api.version>3.1.0</jakarta.jms-api.version>
+        <jakarta.persistence-api.version>3.1.0</jakarta.persistence-api.version>
         <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
         <jakarta.xml.ws-api.version>4.0.0</jakarta.xml.ws-api.version>
         <jaxb-runtime.version>3.0.0</jaxb-runtime.version>
-        <jetty.version>9.4.52.v20230823</jetty.version>
+        <javax.jms-api.version>2.0.1</javax.jms-api.version>
+        <jetty.version>11.0.18</jetty.version>
         <joda.time.version>2.11.2</joda.time.version>
         <log4j.version>2.19.0</log4j.version>
         <jongo.version>1.5.0</jongo.version>
@@ -221,12 +224,13 @@
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty.websocket</groupId>
-                <artifactId>websocket-client</artifactId>
+                <artifactId>websocket-jetty-client</artifactId>
                 <version>${jetty.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.eclipse.jetty.websocket</groupId>
-                <artifactId>websocket-server</artifactId>
+                <artifactId>websocket-jetty-server</artifactId>
                 <version>${jetty.version}</version>
             </dependency>
             <dependency>

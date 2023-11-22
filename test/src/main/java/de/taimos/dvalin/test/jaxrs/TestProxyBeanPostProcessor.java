@@ -47,7 +47,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.ws.rs.ext.Provider;
+import jakarta.ws.rs.ext.Provider;
 
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.springframework.beans.BeanUtils;
@@ -71,7 +71,8 @@ import de.taimos.daemon.spring.annotations.TestComponent;
 
 @SuppressWarnings("serial")
 @TestComponent
-public class TestProxyBeanPostProcessor implements InstantiationAwareBeanPostProcessor, EmbeddedValueResolverAware, BeanFactoryAware, Serializable {
+public class TestProxyBeanPostProcessor
+    implements InstantiationAwareBeanPostProcessor, EmbeddedValueResolverAware, BeanFactoryAware, Serializable {
 
     private transient ConfigurableListableBeanFactory beanFactory;
     private transient StringValueResolver resolver;
@@ -109,7 +110,7 @@ public class TestProxyBeanPostProcessor implements InstantiationAwareBeanPostPro
     }
 
     @Override
-    public PropertyValues postProcessPropertyValues(PropertyValues pvs, PropertyDescriptor[] pds, Object bean, String beanName) throws BeansException {
+    public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {
         InjectionMetadata metadata = this.buildResourceMetadata(bean.getClass());
         try {
             metadata.inject(bean, beanName, pvs);
@@ -144,7 +145,8 @@ public class TestProxyBeanPostProcessor implements InstantiationAwareBeanPostPro
                             throw new IllegalStateException("@TestProxy annotation is not supported on static methods");
                         }
                         if (method.getParameterTypes().length != 1) {
-                            throw new IllegalStateException("@TestProxy annotation requires a single-arg method: " + method);
+                            throw new IllegalStateException(
+                                "@TestProxy annotation requires a single-arg method: " + method);
                         }
                         PropertyDescriptor pd = BeanUtils.findPropertyForMethod(bridgedMethod, clazz);
                         currElements.add(new TestProxyElement(method, pd));
@@ -181,11 +183,15 @@ public class TestProxyBeanPostProcessor implements InstantiationAwareBeanPostPro
         protected Object getResourceToInject(Object target, String requestingBeanName) {
             List<Object> providers = new ArrayList<>();
             try {
-                String componentAnnotation = TestProxyBeanPostProcessor.this.resolver.resolveStringValue("${jaxrs.annotation:de.taimos.dvalin.jaxrs.JaxRsComponent}");
-                Class<? extends Annotation> componentAnnotationClazz = (Class<? extends Annotation>) Class.forName(componentAnnotation);
-                String[] beans = TestProxyBeanPostProcessor.this.beanFactory.getBeanNamesForAnnotation(componentAnnotationClazz);
+                String componentAnnotation = TestProxyBeanPostProcessor.this.resolver.resolveStringValue(
+                    "${jaxrs.annotation:de.taimos.dvalin.jaxrs.JaxRsComponent}");
+                Class<? extends Annotation> componentAnnotationClazz = (Class<? extends Annotation>) Class.forName(
+                    componentAnnotation);
+                String[] beans = TestProxyBeanPostProcessor.this.beanFactory.getBeanNamesForAnnotation(
+                    componentAnnotationClazz);
                 for (String bean : beans) {
-                    if (TestProxyBeanPostProcessor.this.beanFactory.findAnnotationOnBean(bean, Provider.class) != null) {
+                    if (TestProxyBeanPostProcessor.this.beanFactory.findAnnotationOnBean(bean, Provider.class) !=
+                        null) {
                         providers.add(TestProxyBeanPostProcessor.this.beanFactory.getBean(bean));
                     }
                 }
@@ -193,7 +199,8 @@ public class TestProxyBeanPostProcessor implements InstantiationAwareBeanPostPro
                 e.printStackTrace();
             }
 
-            String url = TestProxyBeanPostProcessor.this.resolver.resolveStringValue("${server.url:http://localhost:${jaxrs.bindport:${svc.port:8080}}}");
+            String url = TestProxyBeanPostProcessor.this.resolver.resolveStringValue(
+                "${server.url:http://localhost:${jaxrs.bindport:${svc.port:8080}}}");
             return JAXRSClientFactory.create(url, this.getDependencyDescriptor().getDependencyType(), providers);
         }
     }
