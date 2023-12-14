@@ -20,13 +20,6 @@ package de.taimos.dvalin.interconnect.core.spring;
  * #L%
  */
 
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
-import jakarta.jms.Destination;
-import jakarta.jms.JMSException;
-import jakarta.jms.Message;
-import jakarta.jms.Session;
-import jakarta.jms.TextMessage;
 import de.taimos.daemon.spring.annotations.ProdComponent;
 import de.taimos.dvalin.interconnect.core.InterconnectConnector;
 import de.taimos.dvalin.interconnect.core.MessageConnector;
@@ -35,6 +28,11 @@ import de.taimos.dvalin.interconnect.core.exceptions.InfrastructureException;
 import de.taimos.dvalin.interconnect.model.CryptoException;
 import de.taimos.dvalin.interconnect.model.InterconnectMapper;
 import de.taimos.dvalin.interconnect.model.InterconnectObject;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.jms.Destination;
+import jakarta.jms.JMSException;
+import jakarta.jms.TextMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +42,6 @@ import org.springframework.jms.InvalidDestinationException;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.TextMessage;
 import java.util.HashMap;
 
 
