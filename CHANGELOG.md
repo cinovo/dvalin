@@ -3,6 +3,7 @@
     * Java 17
     * Glassfish jaxb-runtime 3.0.0
     * ActiveMQ Classic 6.0.0
+    * Hibernate 6.4.0.Final
 * Migrated from JUnit 4 to JUnit 5
     * Drop support for Powermock
     * Switch Mockito to Mockito Inline for usage in static mocks

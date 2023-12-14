@@ -20,32 +20,41 @@ package de.taimos.dvalin.jpa;
  * #L%
  */
 
+import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
+import org.hibernate.usertype.EnhancedUserType;
+import org.hibernate.usertype.UserTypeSupport;
+import org.joda.time.DateTime;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Date;
+import java.util.Objects;
 
-import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.type.StandardBasicTypes;
-import org.hibernate.type.StringRepresentableType;
-import org.hibernate.usertype.EnhancedUserType;
-import org.joda.time.DateTime;
+public class JodaDateTimeType implements EnhancedUserType<DateTime>, Serializable {
 
-public class JodaDateTimeType implements EnhancedUserType, Serializable, StringRepresentableType<DateTime> {
-
-    /**     */
+    /**
+     *
+     */
     public static final JodaDateTimeType INSTANCE = new JodaDateTimeType();
 
+    @Serial
     private static final long serialVersionUID = -7443774477681244536L;
 
-    private static final int[] SQL_TYPES = new int[]{Types.TIMESTAMP};
-
+    private final UserTypeSupport<Date> userTypeSupport = new UserTypeSupport<>(Date.class, this.getSqlType());
 
     @Override
-    public int[] sqlTypes() {
-        return JodaDateTimeType.SQL_TYPES;
+    public int getSqlType() {
+        return Types.TIMESTAMP;
+    }
+
+    @Override
+    public String toSqlLiteral(DateTime dateTime) {
+        return null;
     }
 
     @Override
@@ -54,18 +63,19 @@ public class JodaDateTimeType implements EnhancedUserType, Serializable, StringR
     }
 
     @Override
-    public boolean equals(final Object x, final Object y) throws HibernateException {
-        return (x == y) || ((x != null) && x.equals(y));
+    public boolean equals(final DateTime x, final DateTime y) throws HibernateException {
+        return Objects.equals(x, y);
     }
 
     @Override
-    public int hashCode(final Object object) throws HibernateException {
+    public int hashCode(final DateTime object) throws HibernateException {
         return object.hashCode();
     }
 
     @Override
-    public Object nullSafeGet(final ResultSet rs, final String[] names, final SharedSessionContractImplementor session, final Object owner) throws HibernateException, SQLException {
-        final Object timestamp = StandardBasicTypes.TIMESTAMP.nullSafeGet(rs, names[0], session, owner);
+    public DateTime nullSafeGet(ResultSet resultSet, int i, SharedSessionContractImplementor sharedSessionContractImplementor, Object o) throws SQLException {
+
+        final Object timestamp = this.userTypeSupport.nullSafeGet(resultSet, i, sharedSessionContractImplementor, o);
         if (timestamp == null) {
             return null;
         }
@@ -74,16 +84,16 @@ public class JodaDateTimeType implements EnhancedUserType, Serializable, StringR
     }
 
     @Override
-    public void nullSafeSet(final PreparedStatement st, final Object value, final int index, final SharedSessionContractImplementor session) throws HibernateException, SQLException {
+    public void nullSafeSet(final PreparedStatement st, final DateTime value, final int index, final SharedSessionContractImplementor session) throws HibernateException, SQLException {
         if (value == null) {
-            StandardBasicTypes.TIMESTAMP.nullSafeSet(st, null, index, session);
+            st.setNull(index, this.getSqlType());
         } else {
-            StandardBasicTypes.TIMESTAMP.nullSafeSet(st, ((DateTime) value).toDate(), index, session);
+            st.setDate(index, new java.sql.Date(value.toDate().getTime()));
         }
     }
 
     @Override
-    public Object deepCopy(final Object value) throws HibernateException {
+    public DateTime deepCopy(final DateTime value) throws HibernateException {
         return value;
     }
 
@@ -93,33 +103,18 @@ public class JodaDateTimeType implements EnhancedUserType, Serializable, StringR
     }
 
     @Override
-    public Serializable disassemble(final Object value) throws HibernateException {
-        return (Serializable) value;
+    public Serializable disassemble(final DateTime value) throws HibernateException {
+        return value;
     }
 
     @Override
-    public Object assemble(final Serializable cached, final Object value) throws HibernateException {
-        return cached;
+    public DateTime assemble(final Serializable cached, final Object value) throws HibernateException {
+        return (DateTime) cached;
     }
 
     @Override
-    public Object replace(final Object original, final Object target, final Object owner) throws HibernateException {
+    public DateTime replace(final DateTime original, final DateTime target, final Object owner) throws HibernateException {
         return original;
-    }
-
-    @Override
-    public String objectToSQLString(final Object object) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public String toXMLString(final Object object) {
-        return object.toString();
-    }
-
-    @Override
-    public Object fromXMLString(final String string) {
-        return new DateTime(string);
     }
 
     @Override
@@ -128,7 +123,7 @@ public class JodaDateTimeType implements EnhancedUserType, Serializable, StringR
     }
 
     @Override
-    public DateTime fromStringValue(String string) throws HibernateException {
-        return new DateTime(string);
+    public DateTime fromStringValue(CharSequence charSequence) throws HibernateException {
+        return new DateTime(charSequence);
     }
 }
