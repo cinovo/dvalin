@@ -39,7 +39,7 @@
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId>
         </dependency>
-        </dependency>
+
         <!-- JAXB API only -->
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
@@ -53,6 +53,7 @@
             <artifactId>jaxb-impl</artifactId>
             <version>${jaxb-runtime.version}</version>
             <scope>runtime</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
