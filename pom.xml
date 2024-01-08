@@ -59,12 +59,12 @@
         <guava.version>32.1.3-jre</guava.version>
         <hibernate.version>6.4.0.Final</hibernate.version>
         <http.version>2.2</http.version>
-        <jackson.version>2.15.2</jackson.version>
+        <jackson.version>2.16.0</jackson.version>
         <jakarta.annotation-api.version>2.1.1</jakarta.annotation-api.version>
         <jakarta.jms-api.version>3.1.0</jakarta.jms-api.version>
         <jakarta.persistence-api.version>3.1.0</jakarta.persistence-api.version>
         <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
-        <jakarta.xml.ws-api.version>4.0.0</jakarta.xml.ws-api.version>
+        <jakarta.xml.ws-api.version>4.0.1</jakarta.xml.ws-api.version>
         <jaxb-runtime.version>3.0.0</jaxb-runtime.version>
         <javax.jms-api.version>2.0.1</javax.jms-api.version>
         <jetty.version>11.0.18</jetty.version>
@@ -77,6 +77,7 @@
         <mongock.version>5.3.5</mongock.version>
         <mongo-java-server.version>1.43.0</mongo-java-server.version>
         <slf4j.version>1.7.36</slf4j.version>
+        <swagger-jaxrs2-jakarta.version>2.2.19</swagger-jaxrs2-jakarta.version>
         <velocity.version>2.3</velocity.version>
         <xdocreport.version>2.0.4</xdocreport.version>
     </properties>
