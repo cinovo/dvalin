@@ -19,6 +19,18 @@
             <comments>A business-friendly OSS license</comments>
         </license>
     </licenses>
+    <!-- TODO: Cinovo Nexus needed for local development.  Remove before merge in master -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshot</id>
+            <url>http://nexus.dev.cinovo.de/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>Nexus Release Repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
     <developers>
         <developer>
             <id>hoegertn</id>
