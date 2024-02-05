@@ -4,15 +4,18 @@
     * Glassfish jaxb-runtime 3.0.0
     * ActiveMQ Classic 6.0.0
     * Hibernate 6.4.0.Final
-* Migrated from JUnit 4 to JUnit 5
-    * Drop support for Powermock
-    * Switch Mockito to Mockito Inline for usage in static mocks
 
 * Update dependencies
     * Java 17
-    * Glassfish jaxb-runtime 3.0.0
-    * ActiveMQ Classic 6.0.0
-    * Hibernate 6.4.0.Final
+    * AWS 1.12.641
+    * Jetty 9.4.53.v20231009
+    * Log4J 2.22.0
+    * ActiveMQ 5.16.7
+    * Apache CXF 3.5.7
+    * JSON Small and Fast Parser 2.5.0
+    * Guava 32.1.3-jre
+    * Hazelcast 5.3.6
+    * Swagger 2.2.19
     * Liquibase 4.25.0
     * Mongo Java Driver 4.11.1
     * Mongock 5.3.5
@@ -28,7 +31,8 @@
   We do a resend after configurable retry time. If problem does not occur, nothing hanges.
 * IVO generator: replaced old Apache BeanUtils with Spring beans BeanUtils
 * Better error handling for DaemonStarter.abortSystem
-* Fixed vulnerabilities: CVE-2023-33201(Bouncycastle),CVE-2023-40167(Jetty),CVE-2023-45860(Hazelcast),CVE-2023-46604(ActiveMQ)
+* Interconnect: Check topic name for null values
+* Fixed vulnerabilities: CVE-2023-33201(Bouncycastle),CVE-2023-40167(Jetty),CVE-2023-45860(Hazelcast),CVE-2023-46604(ActiveMQ),CVE-2024-21634(AWS)
 
 # 1.34
 * Update dependencies
