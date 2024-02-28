@@ -62,7 +62,7 @@
         </contributor>
     </contributors>
     <properties>
-        <org.springframework.version>6.1.0</org.springframework.version>
+        <org.springframework.version>6.1.4</org.springframework.version>
         <activemq.version>6.0.0</activemq.version>
         <aws.version>1.12.641</aws.version>
         <bson.version>2.13.1</bson.version>
@@ -78,7 +78,7 @@
         <jakarta.xml.ws-api.version>4.0.1</jakarta.xml.ws-api.version>
         <jaxb-runtime.version>3.0.0</jaxb-runtime.version>
         <javax.jms-api.version>2.0.1</javax.jms-api.version>
-        <jetty.version>11.0.18</jetty.version>
+        <jetty.version>11.0.20</jetty.version>
         <joda.time.version>2.12.5</joda.time.version>
         <log4j.version>2.22.0</log4j.version>
         <jongo.version>1.5.1</jongo.version>
