@@ -20,11 +20,11 @@ package de.taimos.dvalin.monitoring.logging;
  * #L%
  */
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import de.taimos.daemon.log4j.Log4jLoggingConfigurer;
 import de.taimos.dvalin.monitoring.MetricInfo;
 import de.taimos.dvalin.monitoring.MetricUnit;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.lang.reflect.Field;
 import java.util.Random;
@@ -33,7 +33,7 @@ public class ConsoleMetricSenderTest {
 
     private ConsoleMetricSender sender;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         new Log4jLoggingConfigurer().simpleLogging();
 

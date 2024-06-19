@@ -92,6 +92,7 @@ class DaemonScannerTest {
 
     @Test
     void testMisingRequestIVO() {
+        Assertions.assertThrows(IllegalStateException.class, () -> {
         final TestRequestHandler rh = new TestRequestHandler() {
 
             @DaemonRequestMethod(idempotent = false)
@@ -100,6 +101,7 @@ class DaemonScannerTest {
             }
         };
         Assertions.assertThrows(IllegalStateException.class, () -> DaemonScanner.scan(rh.getClass()));
+        });
     }
 
     @Test
@@ -229,6 +231,7 @@ class DaemonScannerTest {
             }
         };
         Assertions.assertThrows(IllegalStateException.class, () -> DaemonScanner.scan(rh.getClass()));
+            Assertions.assertEquals(2, DaemonScanner.scan(rh.getClass()).size());
     }
 
     @Test
