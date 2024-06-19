@@ -1,4 +1,4 @@
-package de.taimos.dvalin.mongo;
+package de.taimos.dvalin.mongo.mapper;
 
 /*
  * #%L
@@ -20,18 +20,18 @@ package de.taimos.dvalin.mongo;
  * #L%
  */
 
-import java.io.IOException;
-import java.util.Date;
-
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.ISODateTimeFormat;
+
+import java.io.IOException;
 
 /**
  * Copyright 2015 Hoegernet<br>
@@ -46,7 +46,9 @@ public class JodaMapping {
 
         @Override
         public void serialize(DateTime value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
-            jgen.writeObject(value.toDate());
+            jgen.writeStartObject();
+            jgen.writeStringField("$date", value.withZone(DateTimeZone.UTC).toString(ISODateTimeFormat.dateTime()));
+            jgen.writeEndObject();
         }
 
     }
@@ -55,14 +57,9 @@ public class JodaMapping {
 
         @Override
         public DateTime deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-            Object object = jp.getEmbeddedObject();
-            if (object instanceof Date) {
-                Date date = (Date) object;
-                return new DateTime(date.getTime(), DateTimeZone.forTimeZone(ctxt.getTimeZone()));
-            }
-            return new DateTime(object);
+            JsonNode node = jp.getCodec().readTree(jp);
+            String date = node.get("$date").asText();
+            return ISODateTimeFormat.dateTimeParser().withZoneUTC().parseDateTime(date);
         }
-
     }
-
 }

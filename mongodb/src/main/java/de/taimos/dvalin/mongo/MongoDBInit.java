@@ -20,23 +20,22 @@ package de.taimos.dvalin.mongo;
  * #L%
  */
 
-import java.io.IOException;
-import java.util.Scanner;
-
-import jakarta.annotation.PostConstruct;
-
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import de.taimos.daemon.spring.conditional.OnSystemProperty;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.util.Scanner;
 
 
 /**
@@ -77,7 +76,7 @@ public class MongoDBInit {
             MongoDBInit.LOGGER.info("Scanning for collection data");
             for (Resource res : resources) {
                 String filename = res.getFilename();
-                if(filename != null) {
+                if (filename != null) {
                     String collection = filename.substring(0, filename.length() - 7);
                     MongoDBInit.LOGGER.info("Found collection file: {}", collection);
                     MongoCollection<DBObject> dbCollection = db.getCollection(collection, DBObject.class);

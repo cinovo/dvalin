@@ -31,6 +31,9 @@
   <component name="PWA">
     <option name="wasEnabledAtLeastOnce" value="true" />
   </component>
+  <component name="PWA">
+    <option name="wasEnabledAtLeastOnce" value="true" />
+  </component>
   <component name="ProjectResources">
     <resource url="http://maven.apache.org/xsd/assembly-1.1.2.xsd" location="" />
   </component>
