@@ -91,9 +91,8 @@ class DaemonScannerTest {
     }
 
     @Test
-    void testMisingRequestIVO() {
-        Assertions.assertThrows(IllegalStateException.class, () -> {
-        final TestRequestHandler rh = new TestRequestHandler() {
+    void testMissingRequestIVO() {
+                final TestRequestHandler rh = new TestRequestHandler() {
 
             @DaemonRequestMethod(idempotent = false)
             public void testVoid() {
@@ -101,11 +100,10 @@ class DaemonScannerTest {
             }
         };
         Assertions.assertThrows(IllegalStateException.class, () -> DaemonScanner.scan(rh.getClass()));
-        });
     }
 
     @Test
-    void testMisingRequestIVOAndExceprion() {
+    void testMissingRequestIVOAndExceprion() {
         final TestRequestHandler rh = new TestRequestHandler() {
 
             @DaemonRequestMethod(idempotent = false)
@@ -230,8 +228,8 @@ class DaemonScannerTest {
                 return null;
             }
         };
-        Assertions.assertThrows(IllegalStateException.class, () -> DaemonScanner.scan(rh.getClass()));
-            Assertions.assertEquals(2, DaemonScanner.scan(rh.getClass()).size());
+        Assertions.assertThrows(IllegalStateException.class, () -> {DaemonScanner.scan(rh.getClass());
+            Assertions.assertEquals(2, DaemonScanner.scan(rh.getClass()).size());});
     }
 
     @Test
