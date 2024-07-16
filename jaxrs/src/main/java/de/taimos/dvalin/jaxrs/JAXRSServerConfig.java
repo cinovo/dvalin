@@ -11,6 +11,7 @@ import org.eclipse.jetty.server.handler.ContextHandler;
 import org.eclipse.jetty.server.handler.DefaultHandler;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.util.resource.Resource;
+import org.eclipse.jetty.util.resource.ResourceFactory;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -65,7 +66,7 @@ public class JAXRSServerConfig {
 
     @Bean(name = "cxf-engine")
     public JettyHTTPServerEngineFactory serverEngineFactory(Bus cxf, //
-                                                            @Autowired List<Handler> handlers) {
+        @Autowired List<Handler> handlers) {
         JAXRSServerFactoryBean serverFactoryBean = new JAXRSServerFactoryBean();
         serverFactoryBean.setBus(cxf);
         JettyHTTPServerEngineFactory engineFactory = serverFactoryBean.getBus().getExtension(JettyHTTPServerEngineFactory.class);
@@ -103,19 +104,19 @@ public class JAXRSServerConfig {
     @Order(1)
     @Bean(name = "web-server-context-static")
     public ContextHandler staticContextHandler() throws IOException {
-        return createResourceContext("/", Resource.newResource("./static"));
+        return this.createResourceContext("/", ResourceFactory.root().newResource("./static"));
     }
 
     @Order(2)
     @Bean(name = "web-server-context-web-fs")
     public ContextHandler webFSContextHandler() throws IOException {
-        return createResourceContext("/", Resource.newResource("./web"));
+        return this.createResourceContext("/", ResourceFactory.root().newResource("./web"));
     }
 
     @Order(3)
     @Bean(name = "web-server-context-web")
     public ContextHandler webContextHandler() {
-        return createResourceContext("/", Resource.newClassPathResource("/web"));
+        return this.createResourceContext("/", ResourceFactory.root().newClassLoaderResource("/web"));
     }
 
     @Order(10)

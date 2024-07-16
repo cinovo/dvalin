@@ -23,36 +23,57 @@ package de.taimos.dvalin.jaxrs.websocket;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.taimos.dvalin.jaxrs.MapperFactory;
+import org.eclipse.jetty.websocket.api.Callback;
 import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.api.WebSocketAdapter;
-import org.eclipse.jetty.websocket.api.WriteCallback;
-import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketError;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketOpen;
+import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * Socket adapter for clients
  *
  * @author thoeger
  */
-public class ClientSocketAdapter extends WebSocketAdapter {
+@WebSocket
+public class ClientSocketAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClientSocketAdapter.class);
 
     private final ObjectMapper mapper = MapperFactory.createDefault();
+    private Session session;
 
+    private final LinkedBlockingDeque<String> messageQueue = new LinkedBlockingDeque<>();
+    private final CountDownLatch closeLatch = new CountDownLatch(1);
 
-    /**
-     * this method is called when the request to the server is created. You can use it to modify the request like settings headers for
-     * example.
-     *
-     * @param req the created request that can be modified
-     */
-    @SuppressWarnings("unused")
-    public void modifyRequest(ClientUpgradeRequest req) {
-        //
+    @OnWebSocketClose
+    public void onClose(int statusCode, String reason) {
+        ClientSocketAdapter.LOGGER.info("WebSocket Close: {} - {}", statusCode, reason);
+        this.closeLatch.countDown();
+    }
+
+    @OnWebSocketOpen
+    public void onOpen(Session session) {
+        this.session = session;
+        ClientSocketAdapter.LOGGER.info("WebSocket Open: {}", session);
+    }
+
+    @OnWebSocketError
+    public void onError(Throwable cause) {
+        ClientSocketAdapter.LOGGER.warn("WebSocket Error", cause);
+    }
+
+    @OnWebSocketMessage
+    public void onText(String message) {
+        ClientSocketAdapter.LOGGER.info("Text Message [{}]", message);
+        this.messageQueue.offer(message);
     }
 
     /**
@@ -61,8 +82,7 @@ public class ClientSocketAdapter extends WebSocketAdapter {
      * @param o the object to send to the server
      */
     public final void sendObjectToSocket(Object o) {
-        Session sess = this.getSession();
-        if (sess != null) {
+        if (this.session != null) {
             String json;
             try {
                 json = this.mapper.writeValueAsString(o);
@@ -70,16 +90,15 @@ public class ClientSocketAdapter extends WebSocketAdapter {
                 ClientSocketAdapter.LOGGER.error("Failed to serialize object", e);
                 return;
             }
-            sess.getRemote().sendString(json, new WriteCallback() {
-
+            this.session.sendText(json, new Callback() {
                 @Override
-                public void writeSuccess() {
-                    ClientSocketAdapter.LOGGER.info("Send data to socket");
+                public void fail(Throwable x) {
+                    ClientSocketAdapter.LOGGER.error("Error sending message to socket", x);
                 }
 
                 @Override
-                public void writeFailed(Throwable x) {
-                    ClientSocketAdapter.LOGGER.error("Error sending message to socket", x);
+                public void succeed() {
+                    ClientSocketAdapter.LOGGER.info("Send data to socket");
                 }
             });
         }
@@ -88,12 +107,12 @@ public class ClientSocketAdapter extends WebSocketAdapter {
     /**
      * reads the received string into the given class by parsing JSON
      *
-     * @param <T>     the expected type
-     * @param message the JSON string
-     * @param clazz   the target class of type T
+     * @param <T>   the expected type
+     * @param clazz the target class of type T
      * @return the parsed object or null if parsing was not possible or message is null
      */
-    protected final <T> T readMessage(String message, Class<T> clazz) {
+    public final <T> T readMessage(Class<T> clazz) {
+        String message = this.messageQueue.pollFirst();
         if ((message == null) || message.isEmpty()) {
             ClientSocketAdapter.LOGGER.info("Got empty session data");
             return null;

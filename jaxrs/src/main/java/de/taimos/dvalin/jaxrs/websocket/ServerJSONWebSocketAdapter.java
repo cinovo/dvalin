@@ -20,18 +20,21 @@ package de.taimos.dvalin.jaxrs.websocket;
  * #L%
  */
 
-import java.io.IOException;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.taimos.dvalin.jaxrs.MapperFactory;
+import org.eclipse.jetty.websocket.api.Callback;
 import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.api.WebSocketAdapter;
-import org.eclipse.jetty.websocket.api.WriteCallback;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketError;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketOpen;
+import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import de.taimos.dvalin.jaxrs.MapperFactory;
+import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * Adapter for server-side websocket sessions using JSON transport
@@ -39,14 +42,36 @@ import de.taimos.dvalin.jaxrs.MapperFactory;
  * @param <T>
  * @author thoeger
  */
-public abstract class ServerJSONWebSocketAdapter<T> extends WebSocketAdapter {
+@WebSocket
+public abstract class ServerJSONWebSocketAdapter<T> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ServerJSONWebSocketAdapter.class);
 
     private final ObjectMapper mapper = MapperFactory.createDefault();
+    private Session session;
 
-    @Override
-    public final void onWebSocketText(String message) {
+    private final CountDownLatch closeLatch = new CountDownLatch(1);
+
+    @OnWebSocketClose
+    public void onClose(int statusCode, String reason) {
+        ServerJSONWebSocketAdapter.LOGGER.info("WebSocket Close: {} - {}", statusCode, reason);
+        this.closeLatch.countDown();
+    }
+
+    @OnWebSocketOpen
+    public void onOpen(Session session) {
+        this.session = session;
+        ServerJSONWebSocketAdapter.LOGGER.info("WebSocket Open: {}", session);
+    }
+
+    @OnWebSocketError
+    public void onError(Throwable cause) {
+        ServerJSONWebSocketAdapter.LOGGER.warn("WebSocket Error", cause);
+    }
+
+    @OnWebSocketMessage
+    public void onText(String message) {
+        ServerJSONWebSocketAdapter.LOGGER.info("Text Message [{}]", message);
         if ((message == null) || message.isEmpty()) {
             ServerJSONWebSocketAdapter.LOGGER.info("Got empty socket data");
             this.onWebSocketEmptyMessage();
@@ -110,16 +135,16 @@ public abstract class ServerJSONWebSocketAdapter<T> extends WebSocketAdapter {
      * @param objectToSend the object to send
      */
     protected final void sendObjectToSocket(final Object objectToSend) {
-        this.sendObjectToSocket(objectToSend, new WriteCallback() {
+        this.sendObjectToSocket(objectToSend, new Callback() {
 
             @Override
-            public void writeSuccess() {
-                ServerJSONWebSocketAdapter.LOGGER.debug("Send data to socket: {}", objectToSend);
+            public void fail(Throwable x) {
+                ServerJSONWebSocketAdapter.LOGGER.error("Error sending message to socket", x);
             }
 
             @Override
-            public void writeFailed(Throwable x) {
-                ServerJSONWebSocketAdapter.LOGGER.error("Error sending message to socket", x);
+            public void succeed() {
+                ServerJSONWebSocketAdapter.LOGGER.debug("Send data to socket: {}", objectToSend);
             }
         });
     }
@@ -127,19 +152,18 @@ public abstract class ServerJSONWebSocketAdapter<T> extends WebSocketAdapter {
     /**
      * send object to client and serialize it using JSON
      *
-     * @param objectToSend  the object to send
-     * @param cb the callback after sending the message
+     * @param objectToSend the object to send
+     * @param cb           the callback after sending the message
      */
-    protected final void sendObjectToSocket(Object objectToSend, WriteCallback cb) {
-        Session sess = this.getSession();
-        if (sess != null) {
+    protected final void sendObjectToSocket(Object objectToSend, Callback cb) {
+        if (this.session != null) {
             String json;
             try {
                 json = this.mapper.writeValueAsString(objectToSend);
             } catch (JsonProcessingException e) {
                 throw new RuntimeException("Failed to serialize object", e);
             }
-            sess.getRemote().sendString(json, cb);
+            this.session.sendText(json, cb);
         }
     }
 

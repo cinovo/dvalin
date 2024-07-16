@@ -3,7 +3,7 @@ package de.taimos.dvalin.jaxrs.swagger;
 import de.taimos.dvalin.jaxrs.HttpProfile;
 import org.eclipse.jetty.server.handler.ContextHandler;
 import org.eclipse.jetty.server.handler.ResourceHandler;
-import org.eclipse.jetty.util.resource.Resource;
+import org.eclipse.jetty.util.resource.ResourceFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +27,7 @@ public class SwaggerConfig {
     public ContextHandler swaggerContextHandler() {
         ContextHandler context = new ContextHandler(this.path + "/swagger-ui");
         ResourceHandler res = new ResourceHandler();
-        res.setBaseResource(Resource.newClassPathResource("/swagger"));
+        res.setBaseResource(ResourceFactory.root().newClassLoaderResource("/swagger"));
         context.setHandler(res);
         return context;
     }

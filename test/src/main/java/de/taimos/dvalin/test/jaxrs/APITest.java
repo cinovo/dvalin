@@ -27,15 +27,14 @@ import de.taimos.dvalin.jaxrs.websocket.ClientSocketAdapter;
 import de.taimos.httputils.HTTPRequest;
 import de.taimos.httputils.HTTPResponse;
 import de.taimos.httputils.WS;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Value;
 
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.Response.Status;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Map;
@@ -95,8 +94,7 @@ public abstract class APITest {
      * @param status the status to check against
      */
     protected final void assertStatus(HTTPResponse res, Status status) {
-        Assertions.assertEquals(res.getStatus(), status.getStatusCode(),
-            String.format("Expected %s - was %s", status.getStatusCode(), res.getStatus()));
+        Assertions.assertEquals(res.getStatus(), status.getStatusCode(), String.format("Expected %s - was %s", status.getStatusCode(), res.getStatus()));
     }
 
     /**
@@ -105,8 +103,7 @@ public abstract class APITest {
      * @param res the response to check
      */
     protected final void assertOK(Response res) {
-        Assertions.assertTrue((res.getStatus() >= 200) && (res.getStatus() <= 299),
-            String.format("Expected OK - was %s", res.getStatus()));
+        Assertions.assertTrue((res.getStatus() >= 200) && (res.getStatus() <= 299), String.format("Expected OK - was %s", res.getStatus()));
     }
 
     /**
@@ -116,8 +113,7 @@ public abstract class APITest {
      * @param status the status to check against
      */
     protected final void assertStatus(Response res, Status status) {
-        Assertions.assertEquals(res.getStatus(), status.getStatusCode(),
-            String.format("Expected %s - was %s", status.getStatusCode(), res.getStatus()));
+        Assertions.assertEquals(res.getStatus(), status.getStatusCode(), String.format("Expected %s - was %s", status.getStatusCode(), res.getStatus()));
     }
 
     /**
@@ -176,13 +172,13 @@ public abstract class APITest {
      */
     protected WebSocketClient openWebsocket(String path, ClientSocketAdapter socket) {
         try {
-            WebSocketClient cl = new WebSocketClient();
-            cl.start();
-            ClientUpgradeRequest request = new ClientUpgradeRequest();
-            socket.modifyRequest(request);
-            Future<Session> socketSession = cl.connect(socket, URI.create(this.getWebSocketURL() + path), request);
-            socketSession.get(5, TimeUnit.SECONDS);
-            return cl;
+            WebSocketClient client = new WebSocketClient();
+            client.start();
+
+            ClientSocketAdapter clientEchoSocket = new ClientSocketAdapter();
+            Future<Session> fut = client.connect(clientEchoSocket, URI.create(path));
+            fut.get(5, TimeUnit.SECONDS);
+            return client;
         } catch (Exception e) {
             throw new RuntimeException("WebSocket failed", e);
         }

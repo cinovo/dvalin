@@ -1,11 +1,11 @@
 # current master
 * Update dependencies 2.0
-    * Java 17
+    * Java 21
     * Spring 6.1.9
     * Glassfish jaxb-runtime 3.0.0
     * ActiveMQ Classic 6.0.0
     * Hibernate 6.4.0.Final
-    * Jetty 11.0.21
+    * Jetty 12.0.11
     * Mongo Java Server 1.45.0
 
 * Update dependencies
