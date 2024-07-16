@@ -50,8 +50,12 @@
       <module name="dvalin-examples-jaxrs-hello-world" target="1.8" />
       <module name="dvalin-examples-parent" target="1.8" />
       <module name="dvalin-interconnect-demo" target="1.8" />
+      <module name="dvalin-mongodb-legacy" target="1.8" />
       <module name="dvalin-template-jasperreports" target="1.8" />
       <module name="dvlain-i18n" target="1.8" />
+      <module name="ivo-generation-lab" target="1.8" />
+      <module name="model-common-parent" target="21" />
+      <module name="model-maven-plugin" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>
