@@ -2,7 +2,7 @@ package de.taimos.dvalin.jms.model;
 
 
 import javax.annotation.Nonnull;
-import javax.jms.Message;
+import jakarta.jms.Message;
 
 /**
  * Copyright 2024 Cinovo AG<br>

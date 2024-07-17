@@ -25,9 +25,9 @@ import de.taimos.dvalin.interconnect.model.event.EventDomain;
 import de.taimos.dvalin.interconnect.model.event.IEvent;
 import org.springframework.core.annotation.AnnotationUtils;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.Session;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
+import jakarta.jms.Session;
 import java.io.IOException;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;

@@ -6,7 +6,7 @@ import org.apache.activemq.ClientInternalExceptionListener;
 import org.apache.activemq.transport.TransportListener;
 import org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter;
 
-import javax.jms.ExceptionListener;
+import jakarta.jms.ExceptionListener;
 
 /**
  * Copyright 2024 Cinovo AG<br>

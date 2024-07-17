@@ -3,8 +3,8 @@ package de.taimos.dvalin.interconnect.core.crypto;
 import de.taimos.dvalin.interconnect.core.exceptions.InfrastructureException;
 import de.taimos.dvalin.interconnect.core.exceptions.MessageCryptoException;
 
-import javax.jms.JMSException;
-import javax.jms.TextMessage;
+import jakarta.jms.JMSException;
+import jakarta.jms.TextMessage;
 
 /**
  * Copyright 2024 Cinovo AG<br>

@@ -23,6 +23,7 @@
             <artifactId>dvalin-jms-core</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
+        </dependency>
 
         <!-- Spring Framework -->
         <!-- Core utilities used by other modules. Define this if you use Spring

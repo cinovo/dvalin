@@ -8,7 +8,7 @@ import org.apache.activemq.command.ActiveMQTempTopic;
 import org.apache.activemq.command.ActiveMQTopic;
 
 import javax.annotation.Nonnull;
-import javax.jms.Destination;
+import jakarta.jms.Destination;
 
 /**
  * Copyright 2024 Cinovo AG<br>

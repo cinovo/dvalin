@@ -4,12 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter;
 
+import jakarta.jms.Connection;
+import jakarta.jms.ConnectionFactory;
+import jakarta.jms.ExceptionListener;
+import jakarta.jms.JMSContext;
+import jakarta.jms.JMSException;
+
 import javax.annotation.Nonnull;
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
-import javax.jms.ExceptionListener;
-import javax.jms.JMSContext;
-import javax.jms.JMSException;
 
 /**
  * Copyright 2022 Cinovo AG<br>

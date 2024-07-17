@@ -2,9 +2,9 @@ package de.taimos.dvalin.jms.crypto;
 
 import de.taimos.dvalin.jms.exceptions.MessageCryptoException;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.TextMessage;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
+import jakarta.jms.TextMessage;
 
 /**
  * Copyright 2024 Cinovo AG<br>

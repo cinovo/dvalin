@@ -92,12 +92,6 @@ public class InterconnectBeanPostProcessor
         return pvs;
     }
 
-    @Override
-    @Deprecated
-    public PropertyValues postProcessPropertyValues(@NonNull PropertyValues pvs, @NonNull PropertyDescriptor[] pds, @NonNull Object bean, @NonNull String beanName) throws BeansException {
-        return this.postProcessProperties(pvs, bean, beanName);
-    }
-
     private InjectionMetadata buildResourceMetadata(Class<?> clazz) {
         LinkedList<InjectionMetadata.InjectedElement> elements = new LinkedList<>();
         Class<?> targetClass = clazz;

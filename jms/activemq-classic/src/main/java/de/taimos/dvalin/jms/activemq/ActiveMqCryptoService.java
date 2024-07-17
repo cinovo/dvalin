@@ -5,9 +5,9 @@ import de.taimos.dvalin.jms.crypto.JmsMessageCryptoUtil;
 import de.taimos.dvalin.jms.exceptions.MessageCryptoException;
 import org.apache.activemq.command.ActiveMQTextMessage;
 
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.TextMessage;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
+import jakarta.jms.TextMessage;
 
 /**
  * Copyright 2024 Cinovo AG<br>

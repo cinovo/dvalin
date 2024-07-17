@@ -39,7 +39,6 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.PostConstruct;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;

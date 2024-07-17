@@ -19,6 +19,7 @@
         <option value="$PROJECT_DIR$/interconnect/demo/pom.xml" />
         <option value="$PROJECT_DIR$/archetypes/basic/pom.xml" />
         <option value="$PROJECT_DIR$/monitoring/pom.xml" />
+        <option value="$PROJECT_DIR$/interconnect/core/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

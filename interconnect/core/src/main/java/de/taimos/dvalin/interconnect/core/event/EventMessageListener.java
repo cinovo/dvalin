@@ -29,6 +29,7 @@ import de.taimos.dvalin.jms.DvalinConnectionFactory;
 import de.taimos.dvalin.jms.IDestinationService;
 import de.taimos.dvalin.jms.crypto.ICryptoService;
 import de.taimos.dvalin.jms.model.JmsTarget;
+import jakarta.annotation.Nonnull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

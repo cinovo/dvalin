@@ -26,7 +26,7 @@ import de.taimos.dvalin.jms.model.JmsContext;
 import de.taimos.dvalin.jms.model.JmsResponseContext;
 
 import javax.annotation.Nonnull;
-import javax.jms.Message;
+import jakarta.jms.Message;
 import java.util.List;
 
 /**

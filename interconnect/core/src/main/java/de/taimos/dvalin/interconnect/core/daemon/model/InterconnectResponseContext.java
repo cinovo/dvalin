@@ -30,9 +30,9 @@ import de.taimos.dvalin.jms.model.JmsResponseContext;
 import de.taimos.dvalin.jms.model.JmsTarget;
 
 import javax.annotation.Nonnull;
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.TextMessage;
+import jakarta.jms.Destination;
+import jakarta.jms.JMSException;
+import jakarta.jms.TextMessage;
 import java.io.IOException;
 
 /**

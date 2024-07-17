@@ -5,7 +5,7 @@ import de.taimos.dvalin.jms.IJmsConnector;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.jms.Destination;
+import jakarta.jms.Destination;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;

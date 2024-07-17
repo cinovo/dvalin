@@ -29,9 +29,9 @@ import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.lang.NonNull;
 import org.springframework.util.ErrorHandler;
 
-import javax.jms.Destination;
-import javax.jms.Message;
-import javax.jms.MessageListener;
+import jakarta.jms.Destination;
+import jakarta.jms.Message;
+import jakarta.jms.MessageListener;
 import java.util.function.Function;
 
 

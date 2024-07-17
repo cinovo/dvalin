@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
 
-import javax.jms.Destination;
+import jakarta.jms.Destination;
 
 /**
  * Copyright 2024 Cinovo AG<br>

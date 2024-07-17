@@ -1,6 +1,6 @@
 package de.taimos.dvalin.interconnect.core.daemon;
 
-import javax.jms.Message;
+import jakarta.jms.Message;
 
 /**
  * Copyright 2024 Cinovo AG<br>
