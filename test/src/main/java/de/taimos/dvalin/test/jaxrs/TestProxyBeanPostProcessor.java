@@ -69,7 +69,6 @@ import org.springframework.util.StringValueResolver;
 
 import de.taimos.daemon.spring.annotations.TestComponent;
 
-@SuppressWarnings("serial")
 @TestComponent
 public class TestProxyBeanPostProcessor
     implements InstantiationAwareBeanPostProcessor, EmbeddedValueResolverAware, BeanFactoryAware, Serializable {
@@ -110,6 +109,7 @@ public class TestProxyBeanPostProcessor
     }
 
     @Override
+    @Deprecated
     public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {
         InjectionMetadata metadata = this.buildResourceMetadata(bean.getClass());
         try {
@@ -121,11 +121,11 @@ public class TestProxyBeanPostProcessor
     }
 
     private InjectionMetadata buildResourceMetadata(Class<?> clazz) {
-        LinkedList<InjectionMetadata.InjectedElement> elements = new LinkedList<InjectionMetadata.InjectedElement>();
+        LinkedList<InjectionMetadata.InjectedElement> elements = new LinkedList<>();
         Class<?> targetClass = clazz;
 
         do {
-            LinkedList<InjectionMetadata.InjectedElement> currElements = new LinkedList<InjectionMetadata.InjectedElement>();
+            LinkedList<InjectionMetadata.InjectedElement> currElements = new LinkedList<>();
             for (Field field : targetClass.getDeclaredFields()) {
                 if (field.isAnnotationPresent(TestProxy.class)) {
                     if (Modifier.isStatic(field.getModifiers())) {

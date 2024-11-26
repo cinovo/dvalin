@@ -29,7 +29,6 @@ import de.taimos.dvalin.monitoring.MetricUnit;
 import java.lang.reflect.Field;
 import java.util.Random;
 
-public class ConsoleMetricSenderTest {
 
     private ConsoleMetricSender sender;
 
@@ -44,7 +43,7 @@ public class ConsoleMetricSenderTest {
     }
 
     @Test
-    public void sendMetric() {
+    void sendMetric() throws Exception {
         final String ns = "My/Namespace";
         final String metric = "Test metric";
         final MetricUnit unit = MetricUnit.Count;
