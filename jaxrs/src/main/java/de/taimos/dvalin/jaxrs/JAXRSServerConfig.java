@@ -104,7 +104,7 @@ public class JAXRSServerConfig {
     @Order(1)
     @Bean(name = "web-server-context-static")
     public ContextHandler staticContextHandler() throws IOException {
-        return this.createResourceContext("/", ResourceFactory.root().newResource("./static"));
+        return this.createResourceContext("/static", ResourceFactory.root().newResource("./static"));
     }
 
     @Order(2)
