@@ -10,7 +10,7 @@ import jakarta.jms.ExceptionListener;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSException;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * Copyright 2022 Cinovo AG<br>

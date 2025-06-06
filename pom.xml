@@ -65,12 +65,12 @@
     </contributors>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <org.springframework.version>6.1.9</org.springframework.version>
-        <activemq.version>6.0.0</activemq.version>
+        <org.springframework.version>6.1.20</org.springframework.version>
+        <activemq.version>6.1.6</activemq.version>
         <aws.version>1.12.772</aws.version>
         <bson.version>2.15.1</bson.version>
-        <cxf.version>4.0.4</cxf.version>
-        <guava.version>33.3.0-jre</guava.version>
+        <cxf.version>4.1.2</cxf.version>
+        <guava.version>33.4.8-jre</guava.version>
         <hibernate.version>6.4.0.Final</hibernate.version>
         <http.version>2.2</http.version>
         <jackson.version>2.17.2</jackson.version>
@@ -81,16 +81,16 @@
         <jakarta.xml.ws-api.version>4.0.1</jakarta.xml.ws-api.version>
         <jaxb-runtime.version>3.0.0</jaxb-runtime.version>
         <javax.jms-api.version>2.0.1</javax.jms-api.version>
-        <jetty.version>12.0.11</jetty.version>
-        <joda.time.version>2.12.7</joda.time.version>
-        <log4j.version>2.23.1</log4j.version>
-        <junit.version>5.10.3</junit.version>
+        <jetty.version>12.0.22</jetty.version>
+        <joda.time.version>2.14.0</joda.time.version>
+        <log4j.version>2.24.3</log4j.version>
+        <junit.version>5.13.0</junit.version>
         <mockito-core.version>5.12.0</mockito-core.version>
-        <mongo.version>4.11.4</mongo.version>
+        <mongo.version>4.11.5</mongo.version>
         <mongock.version>5.4.4</mongock.version>
         <mongo-java-server.version>1.45.0</mongo-java-server.version>
         <slf4j.version>1.7.36</slf4j.version>
-        <swagger-jaxrs2-jakarta.version>2.2.22</swagger-jaxrs2-jakarta.version>
+        <swagger-jaxrs2-jakarta.version>2.2.31</swagger-jaxrs2-jakarta.version>
         <velocity.version>2.3</velocity.version>
         <xdocreport.version>2.0.4</xdocreport.version>
     </properties>

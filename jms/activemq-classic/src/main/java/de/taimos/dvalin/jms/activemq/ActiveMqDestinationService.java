@@ -7,7 +7,7 @@ import org.apache.activemq.command.ActiveMQTempQueue;
 import org.apache.activemq.command.ActiveMQTempTopic;
 import org.apache.activemq.command.ActiveMQTopic;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import jakarta.jms.Destination;
 
 /**

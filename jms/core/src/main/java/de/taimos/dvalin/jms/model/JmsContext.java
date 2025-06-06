@@ -3,8 +3,8 @@ package de.taimos.dvalin.jms.model;
 import com.google.common.base.Preconditions;
 import de.taimos.dvalin.jms.IJmsConnector;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import jakarta.jms.Destination;
 import java.io.Serializable;
 import java.util.HashMap;

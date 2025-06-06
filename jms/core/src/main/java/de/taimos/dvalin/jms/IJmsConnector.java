@@ -25,7 +25,7 @@ import de.taimos.dvalin.interconnect.core.exceptions.SerializationException;
 import de.taimos.dvalin.jms.model.JmsContext;
 import de.taimos.dvalin.jms.model.JmsResponseContext;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import jakarta.jms.Message;
 import java.util.List;
 

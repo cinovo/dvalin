@@ -29,7 +29,7 @@ import de.taimos.dvalin.interconnect.core.exceptions.InfrastructureException;
 import de.taimos.dvalin.jms.model.JmsResponseContext;
 import de.taimos.dvalin.jms.model.JmsTarget;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import jakarta.jms.Destination;
 import jakarta.jms.JMSException;
 import jakarta.jms.TextMessage;

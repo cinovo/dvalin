@@ -36,6 +36,10 @@
             <artifactId>spring-context</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>${jakarta.annotation-api.version}</version>
+        </dependency>
     </dependencies>
 </project>

@@ -4,7 +4,7 @@ import de.taimos.dvalin.jms.model.JmsTarget;
 
 import jakarta.jms.Destination;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * Copyright 2024 Cinovo AG<br>

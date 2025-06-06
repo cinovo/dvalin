@@ -4,7 +4,7 @@ import de.taimos.dvalin.jms.IJmsConnector;
 import de.taimos.dvalin.jms.model.JmsContext;
 import de.taimos.dvalin.jms.model.JmsResponseContext;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import jakarta.jms.Message;
 import java.util.ArrayList;
 import java.util.Collections;

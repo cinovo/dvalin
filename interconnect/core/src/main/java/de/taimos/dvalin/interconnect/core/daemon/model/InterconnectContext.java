@@ -7,7 +7,7 @@ import de.taimos.dvalin.interconnect.core.exceptions.InfrastructureException;
 import de.taimos.dvalin.jms.model.JmsContext;
 import de.taimos.dvalin.jms.model.JmsTarget;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.io.IOException;
 import java.util.UUID;
 

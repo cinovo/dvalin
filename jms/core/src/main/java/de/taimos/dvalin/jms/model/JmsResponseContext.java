@@ -1,7 +1,7 @@
 package de.taimos.dvalin.jms.model;
 
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import jakarta.jms.Message;
 
 /**
