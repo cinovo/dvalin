@@ -7,7 +7,8 @@
         <version>2.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
-
+    <name>Dvalin JMS Test</name>
+    <description>Dvalin JMS Test</description>
     <artifactId>dvalin-jms-test</artifactId>
 
     <properties>

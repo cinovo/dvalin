@@ -26,13 +26,13 @@
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk18on</artifactId>
-            <version>1.78.1</version>
+            <version>1.81</version>
         </dependency>
 
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-jaxrs2-jakarta</artifactId>
-            <version>${swagger-jaxrs2-jakarta.version}</version>
+            <version>2.2.40</version>
         </dependency>
 
         <dependency>

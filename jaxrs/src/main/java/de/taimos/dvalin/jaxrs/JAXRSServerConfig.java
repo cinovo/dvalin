@@ -2,6 +2,7 @@ package de.taimos.dvalin.jaxrs;
 
 import de.taimos.dvalin.jaxrs.websocket.WebSocketContextHandler;
 import org.apache.cxf.Bus;
+import org.apache.cxf.configuration.jsse.TLSServerParameters;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.transport.http_jetty.JettyHTTPServerEngine;
 import org.apache.cxf.transport.http_jetty.JettyHTTPServerEngineFactory;
@@ -20,9 +21,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.core.annotation.Order;
 
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.TrustManagerFactory;
+import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.nio.file.Files;
 import java.security.GeneralSecurityException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.util.List;
 
 /**
@@ -44,6 +54,14 @@ public class JAXRSServerConfig {
     protected int port;
     @Value("${jaxrs.protocol:http}")
     protected String protocol;
+    
+    @Value("${jaxrs.server.keyStore:}")
+    protected String keyStorePath;
+    @Value("${jaxrs.server.keyStorePassword:}")
+    protected String keyStorePassword;
+    @Value("${jaxrs.server.keyStoreType:JKS}")
+    protected String keyStoreType;
+    
     @Value("${jetty.minThreads:5}")
     protected int minThreads;
     @Value("${jetty.maxThreads:150}")
@@ -79,6 +97,9 @@ public class JAXRSServerConfig {
     }
 
     protected void createServerEngine(JettyHTTPServerEngineFactory factory, List<Handler> handlers) throws GeneralSecurityException, IOException {
+        if (this.protocol.equals("https")) {
+            factory.setTLSServerParametersForPort(this.port, this.createTLSServerParameters());
+        }
         JettyHTTPServerEngine engine = factory.createJettyHTTPServerEngine(this.host, this.port, this.protocol);
         engine.setThreadingParameters(this.createThreadingParameters());
         engine.setSendServerVersion(this.sendVersion);
@@ -91,6 +112,20 @@ public class JAXRSServerConfig {
         threadingParams.setMinThreads(this.minThreads);
         threadingParams.setMaxThreads(this.maxThreads);
         return threadingParams;
+    }
+
+    protected TLSServerParameters createTLSServerParameters() throws KeyStoreException, NoSuchAlgorithmException, IOException, CertificateException, UnrecoverableKeyException {
+        TLSServerParameters tlsParams = new TLSServerParameters();
+        KeyStore keyStore = KeyStore.getInstance(this.keyStoreType);
+        keyStore.load(Files.newInputStream(new File(this.keyStorePath).toPath()), this.keyStorePassword.toCharArray());
+        KeyManagerFactory keyFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+        keyFactory.init(keyStore, this.keyStorePassword.toCharArray());
+        tlsParams.setKeyManagers(keyFactory.getKeyManagers());
+
+        TrustManagerFactory trustFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+        trustFactory.init(keyStore);
+        tlsParams.setTrustManagers(trustFactory.getTrustManagers());
+        return tlsParams;
     }
 
     protected ContextHandler createResourceContext(String contextPath, Resource base) {

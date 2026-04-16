@@ -8,7 +8,39 @@
     * Jetty 12.0.11
     * Mongo Java Server 1.45.0
 
-#1.37
+#1.38
+* Update dependencies
+    * ActiveMQ 5.16.8
+    * Apache CXF 3.5.11
+    * AWS 1.12.793
+    * Bouncycastle Provider 1.81
+    * Guava 33.4.2-jre
+    * Jetty 9.4.58.v20250814
+    * Joda-Time 2.14.0
+    * JSON Small and Fast Parser 2.5.2
+    * Junit 5.11.4
+    * Liquibase 4.32.0
+    * Log4J 2.25.3
+    * Mongo Java Driver 4.11.5
+    * Mongock 5.5.1
+    * Nimbus JOSE+JWT 10.3
+    * Swagger 2.2.40
+    * Velocity Engine 2.4.1
+* Bugfix: Fixing DaemonExceptionMapper
+* Bugfix: Serialize EventSender messages to json
+* Bugfix: Fixes problem with events time to live set to 10 seconds
+* Bugfix: Fixing problem with retry messages in Interconnect
+* Bugfix: Better error handling in CloudconductorPropertyProvider
+* Bugfix: Throw of timeout exceptions for retries instead of DaemonError, restore 1.35 behavior 
+* Bugfix: Fallback for old dates (before 1970) for mongo
+* Fixed vulnerabilities: CVE-2024-13009(Jetty), CVE-2025-23184(Apache CXF), CVE-2024-57699 (Json-smart),CVE-2025-27533 (ActiveMQ),CVE-2025-68161(Log4j)
+* Logging improvement and extension options for DaemonMessageListener
+* Add TLS server parameters for JAX-RS
+* Improved Errormessage in case of non parseable JSON strings in the space of InterconnectObjects and Messsaging.
+* Add connection pool settings and idle timeout to MongoDB client configuration
+
+
+# 1.37
 * Major bug in interconnect core: DaemonScanner causes IllegalArgumentException due to wrong path of TimeoutException
 
 # 1.36
