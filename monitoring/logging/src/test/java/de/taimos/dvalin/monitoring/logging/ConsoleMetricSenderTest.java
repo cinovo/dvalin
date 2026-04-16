@@ -29,6 +29,7 @@ import de.taimos.dvalin.monitoring.MetricUnit;
 import java.lang.reflect.Field;
 import java.util.Random;
 
+class ConsoleMetricSenderTest {
 
     private ConsoleMetricSender sender;
 

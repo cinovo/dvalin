@@ -3,9 +3,10 @@
     * Java 21
     * Spring 6.1.9
     * Glassfish jaxb-runtime 3.0.0
-    * ActiveMQ Classic 6.0.0
+    * ActiveMQ Classic 6.1.6
     * Hibernate 6.4.0.Final
     * Jetty 12.0.11
+    * Junit 5.13.1
     * Mongo Java Server 1.45.0
 
 #1.38

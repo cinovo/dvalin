@@ -84,10 +84,10 @@
         <jetty.version>12.0.22</jetty.version>
         <joda.time.version>2.14.0</joda.time.version>
         <log4j.version>2.24.3</log4j.version>
-        <junit.version>5.13.0</junit.version>
+        <junit.version>5.13.1</junit.version>
         <mockito-core.version>5.12.0</mockito-core.version>
         <mongo.version>4.11.5</mongo.version>
-	<mongock.version>5.5.1</mongock.version>
+	    <mongock.version>5.5.1</mongock.version>
         <mongo-java-server.version>1.45.0</mongo-java-server.version>
         <slf4j.version>1.7.36</slf4j.version>
         <velocity.version>2.4.1</velocity.version>

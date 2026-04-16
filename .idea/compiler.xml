@@ -22,6 +22,7 @@
         <module name="dvalin-i18n" />
         <module name="dvalin-cloud-aws" />
         <module name="dvalin-interconnect-model" />
+        <module name="dvalin-template-xdocreport" />
         <module name="dvalin-archetype-basic" />
         <module name="dvalin-monitoring-core" />
         <module name="dvalin-notification-aws" />
@@ -40,6 +41,7 @@
         <module name="dvalin-jms-test" />
         <module name="dvalin-interconnect-metamodel" />
         <module name="dvalin-interconnect-core-legacy" />
+        <module name="dvalin-orchestration-etcd" />
         <module name="dvalin-template-velocity" />
         <module name="dvalin-archetype-docker" />
         <module name="dvalin-test" />
@@ -54,9 +56,7 @@
       <module name="dvalin-examples-parent" target="1.8" />
       <module name="dvalin-interconnect-demo" target="1.8" />
       <module name="dvalin-mongodb-legacy" target="1.8" />
-      <module name="dvalin-orchestration-etcd" target="21" />
       <module name="dvalin-template-jasperreports" target="1.8" />
-      <module name="dvalin-template-xdocreport" target="21" />
       <module name="dvlain-i18n" target="1.8" />
       <module name="ivo-generation-lab" target="1.8" />
       <module name="model-common-parent" target="1.8" />
